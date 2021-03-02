@@ -76,5 +76,14 @@ export default {
       url: `/${groupName}/getRoleSelectMenu/${roleId}`,
       method: 'get'
     })
+  },
+  /**
+   * 查询用户的路由
+   */
+  getRouters() {
+    return requset({
+      url: `/${groupName}/getRouters`,
+      method: 'get'
+    })
   }
 }

@@ -121,6 +121,9 @@ export default {
   },
   created() {
     this.getTreeList()
+    // sysMenuApi.getRouters().then(res => {
+    //   console.log(res)
+    // })
   },
   methods: {
     // 打开添加弹窗

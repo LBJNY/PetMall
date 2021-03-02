@@ -13,6 +13,8 @@ import '@/styles/index.scss' // global css
 import App from './App'
 import store from './store'
 import router from './router'
+import permission from '@/directive/permission'
+
 
 import './icons' // icon
 import './permission' // permission control
@@ -37,7 +39,8 @@ Vue.use(Element, {
   size: Cookies.get('size') || 'medium' // set element-ui default size
   // locale: enLang // 如果使用中文，无需设置，请删除
 })
-
+// 引入permission指令
+Vue.use(permission)
 // register global utility filters
 Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])

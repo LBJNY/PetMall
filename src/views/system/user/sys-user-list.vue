@@ -23,8 +23,8 @@
     </div>
     <!-- 搜索栏结束 -->
     <!-- 操作按钮组开始 -->
-    <div class="button-group">
-      <el-button type="primary" size="small" icon="el-icon-plus" @click="toAdd()">添加</el-button>
+     <div v-permission="['sys:user:add']" class="mid-button-group">
+      <el-button size="small" type="primary" icon="el-icon-plus" @click="toAdd">添加</el-button>
     </div>
     <!-- 操作按钮组结束 -->
     <!-- 数据表格开始 -->
@@ -70,10 +70,10 @@
                 <i class="el-icon-arrow-down el-icon--right" />
               </span>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>
+                <el-dropdown-item v-permission="['sys:user:update']">
                   <el-button type="text" icon="el-icon-edit" @click="toUpdate(row.id)">修改</el-button>
                 </el-dropdown-item>
-                <el-dropdown-item @click.native="deleteById(row.id)">
+                <el-dropdown-item v-permission="['sys:user:delete']" @click.native="deleteById(row.id)">
                   <el-button type="text" icon="el-icon-delete">删除</el-button>
                 </el-dropdown-item>
               </el-dropdown-menu>
