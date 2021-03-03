@@ -1,9 +1,9 @@
 <template>
   <div class="upload-container">
     <el-button :style="{background:color,borderColor:color}" icon="el-icon-upload" size="mini" type="primary" @click=" dialogVisible=true">
-      upload
+      上传图片
     </el-button>
-    <el-dialog :visible.sync="dialogVisible">
+    <el-dialog append-to-body :visible.sync="dialogVisible">
       <el-upload
         :multiple="true"
         :file-list="fileList"
@@ -12,18 +12,20 @@
         :on-success="handleSuccess"
         :before-upload="beforeUpload"
         class="editor-slide-upload"
-        action="https://httpbin.org/post"
+        :headers="{Authorization: token}"
+        :data="{dir: 'tinymce'}"
+        :action="uploadUrl"
         list-type="picture-card"
       >
         <el-button size="small" type="primary">
-          Click upload
+          点击上传
         </el-button>
       </el-upload>
       <el-button @click="dialogVisible = false">
-        Cancel
+        取消
       </el-button>
       <el-button type="primary" @click="handleSubmit">
-        Confirm
+        确定
       </el-button>
     </el-dialog>
   </div>
@@ -32,6 +34,7 @@
 <script>
 // import { getToken } from 'api/qiniu'
 
+import { mapGetters } from 'vuex'
 export default {
   name: 'EditorSlideUpload',
   props: {
@@ -43,9 +46,16 @@ export default {
   data() {
     return {
       dialogVisible: false,
+      // 图片上传路径
+      uploadUrl: process.env.VUE_APP_UPLOAD_URL,
       listObj: {},
       fileList: []
     }
+  },
+  computed: {
+    ...mapGetters([
+      'token'
+    ])
   },
   methods: {
     checkAllSuccess() {
@@ -67,7 +77,8 @@ export default {
       const objKeyArr = Object.keys(this.listObj)
       for (let i = 0, len = objKeyArr.length; i < len; i++) {
         if (this.listObj[objKeyArr[i]].uid === uid) {
-          this.listObj[objKeyArr[i]].url = response.files.file
+          // 回显上传成功后返回的url
+          this.listObj[objKeyArr[i]].url = response.data
           this.listObj[objKeyArr[i]].hasSuccess = true
           return
         }
