@@ -52,5 +52,11 @@ export default {
       method: 'put',
       data: { id: id }
     })
+  },
+  getAllSecond(){ // 查询所有二级菜单
+    return request({
+      url: `/${groupName}/getAllSecond`,
+      method: 'get'
+    })
   }
 }
