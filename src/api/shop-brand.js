@@ -39,5 +39,17 @@ export default {
       url: `/${groupName}/delete/${id}`,
       method: 'delete'
     })
-  }
+  },
+  getByCategoryId(id) { // 根据分类id查询品牌
+    return request({
+      url: `/${groupName}/getByCategoryId/${id}`,
+      method: 'get'
+    })
+  },
+  getByName(name) { // 根据名称查询修改回显
+    return request({
+      url: `/${groupName}/getByName/${name}`,
+      method: 'get'
+    })
+  },
 }
